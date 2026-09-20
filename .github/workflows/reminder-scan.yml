@@ -1,0 +1,14 @@
+name: Reminder Scan
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call reminder-scan function
+        run: |
+          curl -X POST "https://ewuzdujlnmyuyxdkgkom.functions.supabase.co/reminder-scan" \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}"
