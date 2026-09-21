@@ -1,0 +1,14 @@
+name: Push Receipt Check
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call push-receipt-check function
+        run: |
+          curl -X POST "https://ewuzdujlnmyuyxdkgkom.functions.supabase.co/push-receipt-check" \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}"
